@@ -1,9 +1,11 @@
 import { NavLink } from "react-router"
+import SearchBar from "./SearchBar"
 
 export default function NavBar(){
 
   return (
     <nav className="NavBar">
+      <SearchBar />
 
       <NavLink to='/'>
         Home
