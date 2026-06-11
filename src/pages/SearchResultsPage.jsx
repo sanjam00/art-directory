@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router"
+import settings from "../settings";
 
 export default function SearchResultsPage(){
   const [searchParams] = useSearchParams();
@@ -10,7 +11,7 @@ export default function SearchResultsPage(){
   useEffect(() => {
     if (!query) return;
 
-    fetch(`https://collectionapi.metmuseum.org/public/collection/v1/search?q=${query}`)
+    fetch(`${settings.met.baseurl}/search?q=${query}`)
     .then(r => {
       if (!r.ok) {throw new Error("Failed to fetch")}
       return r.json();
@@ -21,7 +22,7 @@ export default function SearchResultsPage(){
 
       return Promise.all(
         ids.map(id =>
-          fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`)
+          fetch(`${settings.met.baseurl}/objects/${id}`)
           .then(r => {
             if (!r.ok) { throw new Error("Failed to fetch") }
             return r.json();
