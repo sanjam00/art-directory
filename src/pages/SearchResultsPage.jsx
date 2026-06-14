@@ -7,6 +7,9 @@ export default function SearchResultsPage(){
   const query = searchParams.get("q");
 
   const [objects, setObjects] = useState([]);
+  const [artists, setArtists] = useState([]);
+
+  const [activeTab, setActiveTab] = useState("artists");
 
   useEffect(() => {
     if (!query) return;
@@ -18,7 +21,7 @@ export default function SearchResultsPage(){
     })
     .then(data => {
       console.log(data)
-      const ids = data.objectIDs.slice(0, 12) || [];
+      const ids = data.objectIDs.slice(0, 50) || [];
 
       return Promise.all(
         ids.map(id =>
@@ -33,22 +36,85 @@ export default function SearchResultsPage(){
     .then((results) => {
       console.log(results)
       setObjects(results);
+
+      const artistData = buildArtists(results);
+      setArtists(artistData);
     })
     .catch(console.error)
   }, [query])
+
+  // creates an artist profile
+  const buildArtists = (objects) => {
+    const artistMap = {};
+
+    objects.forEach(object => {
+      const name = object.artistDisplayName;
+
+      if (!name) return;
+      if (!artistMap[name]) {
+        artistMap[name] = {
+          name,
+          nationality: object.artistNationality,
+          beginDate: object.artistBeginDate,
+          endDate: object.artistEndDate,
+          artworks: []
+        }
+      }
+
+      artistMap[name].artworks.push(object)
+    });
+
+    return Object.values(artistMap)
+  }
 
   return(
     <div className="SearchResults">
       <h1>Results for "{query}"</h1>
 
-      {objects.map((object) => (
+      <div className="tabs">
+        {/* <button onClick={() => setActiveTab("all")}>
+          All
+        </button> */}
+        <button onClick={() => setActiveTab("artists")}>
+          Artists
+        </button>
+        <button onClick={()=> setActiveTab("artworks")}>
+          Artworks
+        </button>
+      </div>
+      
+      {/* { activeTab === "all" && 
+      objects.map((object) => (
         <div key={object.objectID}>
+          <img src={object.primaryImage ? object.primaryImage : "(No image available at this time)"} 
+            alt="(No image available at this time)" />
           <h3>{object.title}</h3>
-          <img src={object.primaryImageSmall} />
           <p>{object.artistDisplayName}</p>
         </div>
+      
+      ))} */}
 
-      ))}
+      {activeTab === "artists" && 
+        artists.map(artist => (
+          <div key={artist.name}>
+            <h3>{artist.name}</h3>
+          <p>{artist.nationality}</p>
+          <p>{artist.beginDate} - {artist.endDate}</p>
+          </div>
+        ))
+      }
+
+      {activeTab === "artworks" &&
+        objects.map(object => (
+          <div key={object.objectID}>
+            <img src={object.primaryImage ? object.primaryImage : "(No image available at this time)"} 
+              alt="(No image available at this time)"/>
+            <h3>{object.title}</h3>
+            <p>{object.artistDisplayName}</p>
+          </div>
+        ))
+      }
+
     </div>
   )
 }
