@@ -80,6 +80,7 @@ export default function SearchResultsPage({ buildArtists }){
         ))
       }
 
+      {/* add navigation link when click on artist name */}
       {activeTab === "artworks" &&
         objects.map(object => (
           <div key={object.objectID}>
