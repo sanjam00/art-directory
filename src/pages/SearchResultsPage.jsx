@@ -59,9 +59,6 @@ export default function SearchResultsPage({ buildArtists }){
       <h1>Results for "{query}"</h1>
 
       <div className="tabs">
-        {/* <button onClick={() => setActiveTab("all")}>
-          All
-        </button> */}
         <button onClick={() => setActiveTab("artists")}>
           Artists
         </button>
@@ -72,7 +69,7 @@ export default function SearchResultsPage({ buildArtists }){
 
       {activeTab === "artists" && 
         artists.map(artist => (
-          <div key={artist.name}>
+          <div key={artist.name} className="artistCard">
             <h3 onClick={() => artistPageNavigate(artist)}>{artist.name}</h3>
             <p>{artist.nationality}</p>
             <p>{artist.beginDate} - {artist.endDate}</p>
@@ -83,7 +80,7 @@ export default function SearchResultsPage({ buildArtists }){
       {/* add navigation link when click on artist name */}
       {activeTab === "artworks" &&
         objects.map(object => (
-          <div key={object.objectID}>
+          <div key={object.objectID} className="artworkCard">
             <img src={object.primaryImageSmall ? object.primaryImageSmall : "(No image available at this time)"} 
               alt="(No image available at this time)"/>
             <h3>{object.title}</h3>

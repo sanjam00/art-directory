@@ -1,21 +1,22 @@
 import { NavLink } from "react-router"
 import SearchBar from "./SearchBar"
+import "./NavBar.css"
 
 export default function NavBar(){
 
   return (
-    <nav className="NavBar">
+    <nav className="navbar">
       <SearchBar />
 
       <NavLink to='/'>
         Home
       </NavLink>
 
-      <NavLink to='/artistpage'>
+      <NavLink to='/artists'>
         Artist Page
       </NavLink>
 
-      <NavLink to='/artworkpage'>
+      <NavLink to='/artworks'>
         Artwork Page
       </NavLink>
 

@@ -14,10 +14,12 @@ export default function SearchBar(){
   }
 
   return (
-    <div className="SearchBar">
+    <div className="searchbar">
 
         <form onSubmit={handleSubmit}>
-          <input placeholder="Placeholder text" 
+          <input 
+            id="searchbarinput"
+            placeholder="Search for Artists, Artworks, and more" 
             value={inputText} 
             onChange={(e) => setInputText(e.target.value)}/>
         </form>

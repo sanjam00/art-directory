@@ -1,0 +1,26 @@
+.navbar {
+  background: #c7a005;
+  padding: 2em;
+  margin: -.5em;
+}
+
+/* links on left side, search bar on right*/
+.navbar>a {
+  padding: 1em;
+  text-decoration: none;
+  color: #45474A;
+}
+
+.navbar>a:hover{
+  color: #FFFBEB;
+  transition: .5s;
+}
+
+.searchbar {
+  padding: .25em;
+  margin: .2em 1em;
+}
+
+#searchbarinput{
+  padding: .5em 2em;
+}

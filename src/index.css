@@ -1,0 +1,19 @@
+:root {
+  background-color: #FFFBEB;
+  color: #45474A;
+}
+
+/* make look like tabs, not buttons */
+button{
+  padding: .5em 1em;
+  margin:.25em;
+  background-color: #FFFBEB;
+  color: #C7A005;
+  border: none;
+}
+
+button:hover{
+  color: #7D7283;
+  transition: .5s;
+  scale: 1.1;
+}
