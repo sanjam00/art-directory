@@ -10,6 +10,33 @@ import SearchResultsPage from './pages/SearchResultsPage'
 
 function App() {
 
+  // creates an artist profile
+  // !!! add biography and a link to wikipedia page. 
+  // --> can't because those don't exist for the artists, just the artworks. would need a different api
+  const buildArtists = (objects) => {
+    const artistMap = {};
+
+    objects.forEach(object => {
+      const name = object.artistDisplayName;
+
+      if (!name) return;
+      if (!artistMap[name]) {
+        artistMap[name] = {
+          name,
+          nationality: object.artistNationality,
+          beginDate: object.artistBeginDate,
+          endDate: object.artistEndDate,
+          artworks: []
+        }
+      }
+
+      artistMap[name].artworks.push(object)
+    });
+
+    return Object.values(artistMap)
+  }
+
+  // build helper function to build artwork profile
   
   return (
     <BrowserRouter>
@@ -19,8 +46,8 @@ function App() {
       {/* <Route path='/artistpage' element={<ArtistPage />} /> */}
       {/* <Route path='/artworkpage' element={<ArtworkPage />} /> */}
       <Route path='/contactpage' element={<ContactPage />} />
-      <Route path='/search' element={<SearchResultsPage />} />
-      <Route path='/artist/:artistName' element={<ArtistPage />} />
+      <Route path='/search' element={<SearchResultsPage buildArtists={buildArtists} />} />
+      <Route path='/artist/:artistName' element={<ArtistPage buildArtists={buildArtists} />} />
       <Route path='/artwork/:artworkName' element={<ArtworkPage />} />
     </Routes>
   </BrowserRouter>

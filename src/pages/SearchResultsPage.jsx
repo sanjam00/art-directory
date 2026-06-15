@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router"
+import { useSearchParams, useNavigate } from "react-router-dom"
 import settings from "../settings";
 
-export default function SearchResultsPage(){
+export default function SearchResultsPage({ buildArtists }){
   const [searchParams] = useSearchParams();
   const query = searchParams.get("q");
 
@@ -10,6 +10,8 @@ export default function SearchResultsPage(){
   const [artists, setArtists] = useState([]);
 
   const [activeTab, setActiveTab] = useState("artists");
+  
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!query) return;
@@ -23,6 +25,7 @@ export default function SearchResultsPage(){
       console.log(data)
       const ids = data.objectIDs.slice(0, 50) || [];
 
+      // must use second fetch bc first returns only objectIDs
       return Promise.all(
         ids.map(id =>
           fetch(`${settings.met.baseurl}/objects/${id}`)
@@ -37,34 +40,15 @@ export default function SearchResultsPage(){
       console.log(results)
       setObjects(results);
 
+      // pass data into func to build artist data object
       const artistData = buildArtists(results);
       setArtists(artistData);
     })
     .catch(console.error)
   }, [query])
 
-  // creates an artist profile
-  const buildArtists = (objects) => {
-    const artistMap = {};
-
-    objects.forEach(object => {
-      const name = object.artistDisplayName;
-
-      if (!name) return;
-      if (!artistMap[name]) {
-        artistMap[name] = {
-          name,
-          nationality: object.artistNationality,
-          beginDate: object.artistBeginDate,
-          endDate: object.artistEndDate,
-          artworks: []
-        }
-      }
-
-      artistMap[name].artworks.push(object)
-    });
-
-    return Object.values(artistMap)
+  const artistPageNavigate = (artistName) => {
+    navigate(`/artist/${encodeURIComponent(artistName)}`);
   }
 
   return(
@@ -97,9 +81,9 @@ export default function SearchResultsPage(){
       {activeTab === "artists" && 
         artists.map(artist => (
           <div key={artist.name}>
-            <h3>{artist.name}</h3>
-          <p>{artist.nationality}</p>
-          <p>{artist.beginDate} - {artist.endDate}</p>
+            <h3 onClick={() => artistPageNavigate(artist.name)}>{artist.name}</h3>
+            <p>{artist.nationality}</p>
+            <p>{artist.beginDate} - {artist.endDate}</p>
           </div>
         ))
       }
@@ -107,7 +91,7 @@ export default function SearchResultsPage(){
       {activeTab === "artworks" &&
         objects.map(object => (
           <div key={object.objectID}>
-            <img src={object.primaryImage ? object.primaryImage : "(No image available at this time)"} 
+            <img src={object.primaryImageSmall ? object.primaryImageSmall : "(No image available at this time)"} 
               alt="(No image available at this time)"/>
             <h3>{object.title}</h3>
             <p>{object.artistDisplayName}</p>
