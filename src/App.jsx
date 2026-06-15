@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css'
-import ArtistPage from './pages/ArtistPage'
+import ArtistBioPage from './pages/ArtistBioPage'
 import HomePage from './pages/HomePage'
-import ArtworkPage from './pages/ArtworkPage'
+import ArtworksPage from './pages/ArtworksPage'
+import ArtworkBioPage from './pages/ArtworkBioPage'
 import NavBar from './components/NavBar'
 import ContactPage from './pages/ContactPage'
 import SearchResultsPage from './pages/SearchResultsPage'
+import ArtistsPage from './pages/ArtistsPage'
 
 function App() {
 
@@ -43,12 +45,13 @@ function App() {
     <NavBar />
     <Routes>
       <Route path="/" element={<HomePage />} />
-      {/* <Route path='/artistpage' element={<ArtistPage />} /> */}
-      {/* <Route path='/artworkpage' element={<ArtworkPage />} /> */}
       <Route path='/contactpage' element={<ContactPage />} />
       <Route path='/search' element={<SearchResultsPage buildArtists={buildArtists} />} />
-      <Route path='/artist/:artistName' element={<ArtistPage buildArtists={buildArtists} />} />
-      <Route path='/artwork/:artworkName' element={<ArtworkPage />} />
+      <Route path='/artists' element={<ArtistsPage />} />
+      <Route path='/artworks' element={<ArtworksPage />} />
+
+      <Route path='/artist/:artistName' element={<ArtistBioPage buildArtists={buildArtists} />} />
+      <Route path='/artwork/:artworkName' element={<ArtworkBioPage />} />
     </Routes>
   </BrowserRouter>
   )

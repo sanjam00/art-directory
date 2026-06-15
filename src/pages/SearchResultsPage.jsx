@@ -23,7 +23,7 @@ export default function SearchResultsPage({ buildArtists }){
     })
     .then(data => {
       console.log(data)
-      const ids = data.objectIDs.slice(0, 50) || [];
+      const ids = data.objectIDs.slice(0, 30) || [];
 
       // must use second fetch bc first returns only objectIDs
       return Promise.all(
@@ -47,8 +47,11 @@ export default function SearchResultsPage({ buildArtists }){
     .catch(console.error)
   }, [query])
 
-  const artistPageNavigate = (artistName) => {
-    navigate(`/artist/${encodeURIComponent(artistName)}`);
+  const artistPageNavigate = (artist) => {
+    navigate(
+      `/artist/${encodeURIComponent(artist.name)}`,
+      {state: {artist}}
+    );
   }
 
   return(
@@ -66,22 +69,11 @@ export default function SearchResultsPage({ buildArtists }){
           Artworks
         </button>
       </div>
-      
-      {/* { activeTab === "all" && 
-      objects.map((object) => (
-        <div key={object.objectID}>
-          <img src={object.primaryImage ? object.primaryImage : "(No image available at this time)"} 
-            alt="(No image available at this time)" />
-          <h3>{object.title}</h3>
-          <p>{object.artistDisplayName}</p>
-        </div>
-      
-      ))} */}
 
       {activeTab === "artists" && 
         artists.map(artist => (
           <div key={artist.name}>
-            <h3 onClick={() => artistPageNavigate(artist.name)}>{artist.name}</h3>
+            <h3 onClick={() => artistPageNavigate(artist)}>{artist.name}</h3>
             <p>{artist.nationality}</p>
             <p>{artist.beginDate} - {artist.endDate}</p>
           </div>

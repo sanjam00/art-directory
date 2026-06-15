@@ -1,6 +1,6 @@
 
 
-export default function ArtworkPage(){
+export default function ArtworksPage(){
 
   return(
     <>
