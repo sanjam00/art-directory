@@ -1,16 +1,13 @@
-import { useLocation, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import settings from "../settings";
 import { useEffect, useState } from "react";
 
 export default function ArtistBioPage() {
-
-  // const location = useLocation();
-  // const artist = location.state?.artist;
   const {artistId} = useParams();
   const [artistData, setArtistData] = useState(null);
   const [error, setError] = useState(null);
 
-  // fetch artist profile
+  // fetch artist profile from aic api
   useEffect(() => {
 
     // guard the effect

@@ -42,11 +42,6 @@ export default function SearchResultsPage({ buildArtists }){
 
       // store artwork results in state
       setObjects(results);
-
-      // don't need anymore bc using aic api for artist profiles
-      // pass data into func to build artist data object
-      // const artistData = buildArtists(results);
-      // setArtists(artistData);
     })
     .catch(console.error)
   }, [query])
@@ -68,9 +63,11 @@ export default function SearchResultsPage({ buildArtists }){
   }, [query])
 
   const artistPageNavigate = (artist) => {
-    navigate(
-      `/artist/${artist.id}`
-    );
+    navigate(`/artist/${artist.id}`);
+  }
+
+  const artworkPageNavigate = (artwork) => {
+    navigate(`/artwork/${artwork.objectID}`)
   }
 
   return(
@@ -86,6 +83,7 @@ export default function SearchResultsPage({ buildArtists }){
         </button>
       </div>
 
+      {/* add nationality and dates alive */}
       {activeTab === "artists" && 
         artists.map(artist => (
           <div key={artist.id} className="artistCard">
@@ -94,10 +92,10 @@ export default function SearchResultsPage({ buildArtists }){
         ))
       }
 
-      {/* add navigation link when click on artist name */}
+      {/* add navigation link (visual on hover) when click on artist name */}
       {activeTab === "artworks" &&
         objects.map(object => (
-          <div key={object.objectID} className="artworkCard">
+          <div key={object.objectID} className="artworkCard" onClick={() => artworkPageNavigate(object)}>
             <img src={object.primaryImageSmall ? object.primaryImageSmall : "(No image available at this time)"} 
               alt="(No image available at this time)"/>
             <h3>{object.title}</h3>
