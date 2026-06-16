@@ -15,28 +15,28 @@ function App() {
   // creates an artist profile
   // !!! add biography and a link to wikipedia page. 
   // --> can't because those don't exist for the artists, just the artworks. would need a different api
-  const buildArtists = (objects) => {
-    const artistMap = {};
+  // const buildArtists = (objects) => {
+  //   const artistMap = {};
 
-    objects.forEach(object => {
-      const name = object.artistDisplayName;
+  //   objects.forEach(object => {
+  //     const name = object.artistDisplayName;
 
-      if (!name) return;
-      if (!artistMap[name]) {
-        artistMap[name] = {
-          name,
-          nationality: object.artistNationality,
-          beginDate: object.artistBeginDate,
-          endDate: object.artistEndDate,
-          artworks: []
-        }
-      }
+  //     if (!name) return;
+  //     if (!artistMap[name]) {
+  //       artistMap[name] = {
+  //         name,
+  //         nationality: object.artistNationality,
+  //         beginDate: object.artistBeginDate,
+  //         endDate: object.artistEndDate,
+  //         artworks: []
+  //       }
+  //     }
 
-      artistMap[name].artworks.push(object)
-    });
+  //     artistMap[name].artworks.push(object)
+  //   });
 
-    return Object.values(artistMap)
-  }
+  //   return Object.values(artistMap)
+  // }
 
   // build helper function to build artwork profile
   
@@ -46,11 +46,11 @@ function App() {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path='/contactpage' element={<ContactPage />} />
-      <Route path='/search' element={<SearchResultsPage buildArtists={buildArtists} />} />
+      <Route path='/search' element={<SearchResultsPage />} />
       <Route path='/artists' element={<ArtistsPage />} />
       <Route path='/artworks' element={<ArtworksPage />} />
 
-      <Route path='/artist/:artistName' element={<ArtistBioPage buildArtists={buildArtists} />} />
+      <Route path='/artist/:artistId' element={<ArtistBioPage />} />
       <Route path='/artwork/:artworkName' element={<ArtworkBioPage />} />
     </Routes>
   </BrowserRouter>

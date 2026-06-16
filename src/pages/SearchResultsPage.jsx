@@ -13,6 +13,7 @@ export default function SearchResultsPage({ buildArtists }){
   
   const navigate = useNavigate();
 
+  // fetch artwork list
   useEffect(() => {
     if (!query) return;
 
@@ -22,8 +23,8 @@ export default function SearchResultsPage({ buildArtists }){
       return r.json();
     })
     .then(data => {
-      console.log(data)
-      const ids = data.objectIDs.slice(0, 30) || [];
+      console.log("Artwork objectIDs from Met API: ", data)
+      const ids = data.objectIDs.slice(0, 10) || [];
 
       // must use second fetch bc first returns only objectIDs
       return Promise.all(
@@ -37,20 +38,38 @@ export default function SearchResultsPage({ buildArtists }){
       )
     })
     .then((results) => {
-      console.log(results)
+      console.log("Artwork details: ", results)
+
+      // store artwork results in state
       setObjects(results);
 
+      // don't need anymore bc using aic api for artist profiles
       // pass data into func to build artist data object
-      const artistData = buildArtists(results);
-      setArtists(artistData);
+      // const artistData = buildArtists(results);
+      // setArtists(artistData);
+    })
+    .catch(console.error)
+  }, [query])
+
+  // fetch artist list
+  useEffect(() => {
+    fetch(`${settings.aic.baseurl}/agents/search?q=${query}`)
+    .then((r) => {
+      if (!r.ok) { throw new Error("Failed to fetch.") }
+      return r.json()
+    })
+    .then((data) => {
+      console.log("Artist data from the AIC API: ", data)
+
+      // store artist results in state
+      setArtists(data.data)
     })
     .catch(console.error)
   }, [query])
 
   const artistPageNavigate = (artist) => {
     navigate(
-      `/artist/${encodeURIComponent(artist.name)}`,
-      {state: {artist}}
+      `/artist/${artist.id}`
     );
   }
 
@@ -69,10 +88,8 @@ export default function SearchResultsPage({ buildArtists }){
 
       {activeTab === "artists" && 
         artists.map(artist => (
-          <div key={artist.name} className="artistCard">
-            <h3 onClick={() => artistPageNavigate(artist)}>{artist.name}</h3>
-            <p>{artist.nationality}</p>
-            <p>{artist.beginDate} - {artist.endDate}</p>
+          <div key={artist.id} className="artistCard">
+            <h3 onClick={() => artistPageNavigate(artist)}>{artist.title}</h3>
           </div>
         ))
       }

@@ -3,6 +3,9 @@
 const settings = {
   "met": {
     "baseurl": "https://collectionapi.metmuseum.org/public/collection/v1"
+  },
+  "aic": {
+    "baseurl": "https://api.artic.edu/api/v1"
   }
 };
 

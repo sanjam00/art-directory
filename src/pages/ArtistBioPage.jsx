@@ -2,30 +2,68 @@ import { useLocation, useParams } from "react-router-dom"
 import settings from "../settings";
 import { useEffect, useState } from "react";
 
-export default function ArtistPage({ buildArtists }) {
+export default function ArtistBioPage() {
 
-  const location = useLocation();
-  const artist = location.state?.artist;
+  // const location = useLocation();
+  // const artist = location.state?.artist;
+  const {artistId} = useParams();
+  const [artistData, setArtistData] = useState(null);
+  const [error, setError] = useState(null);
 
-  if (!artist) {
+  // fetch artist profile
+  useEffect(() => {
+
+    // guard the effect
+    if (!artistId) return;
+
+    fetch(`${settings.aic.baseurl}/agents/${artistId}`)
+    .then((r) => {
+      if (!r.ok) { throw new Error("Failed to fetch.") }
+      return r.json()
+    })
+    .then((data) => {
+      console.log("Artist data: ", data);
+      setArtistData(data.data);
+      setError(null);
+    })
+    .catch((error) => {
+      console.error(error);
+      setError("Failed to load artist details");
+    })
+  }, [artistId])
+  
+  if (error) {
+    return <p>{error}</p>
+  }
+  
+  // doesn't work. if api fails, this stays on the screen. implement better error handling
+  if (!artistId) {
     return <p>Loading artist information ...</p>;
   }
+  if (!artistData) {
+    return <p>Loading artist details ...</p>
+  }
+  
+  // fetch artworks for that artist => Highlighted Works
 
   return (
     <div>
-      <h1>{artist.name}</h1>
-      <p>{artist.nationality}</p>
-      <p>{artist.beginDate} - {artist.endDate}</p>
+      {/* // first half will be from AIC api: the name, date, portrait, bio, etc. */}
+      <h1>{artistData.title}</h1>
+      {/* <p>{artist.nationality}</p> */}
+      <p>{artistData.birth_date} - {artistData.death_date}</p>
+      <p>{artistData.description}</p>
       
+      {/* // second half (highlighted works) will be from Met api */}
       <h2>Highlighted Works</h2>
 
-      {artist.artworks.map(work => (
+      {/* {artist.artworks.map(work => (
         <div key={work.objectID}>
           <img src={work.primaryImageSmall} />
           <p>{work.title}</p>
           <p>{work.objectDate}</p>
         </div>
-      ))}
+      ))} */}
 
     </div>
   )
