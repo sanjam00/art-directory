@@ -55,9 +55,27 @@ export default function SearchResultsPage({ buildArtists }){
     })
     .then((data) => {
       console.log("Artist data from the AIC API: ", data)
-
       // store artist results in state
-      setArtists(data.data)
+      // setArtists(data.data)
+      const artistsData = data.data || [];
+      const ids = artistsData.map((artist) => artist.id);
+
+      return Promise.all(
+        ids.map((id) =>
+          fetch(`${settings.aic.baseurl}/agents/${id}`)
+          .then((r) => {
+            if (!r.ok) { throw new Error("Failed to fetch.") }
+            return r.json()
+          })
+        )
+      )
+    })
+    .then((results) => {
+      const detailedArtists = results.map(
+        result => result.data
+      );
+
+      setArtists(detailedArtists);
     })
     .catch(console.error)
   }, [query])
@@ -83,11 +101,16 @@ export default function SearchResultsPage({ buildArtists }){
         </button>
       </div>
 
-      {/* add nationality and dates alive */}
+      {/* add dates alive */}
       {activeTab === "artists" && 
         artists.map(artist => (
           <div key={artist.id} className="artistCard">
             <h3 onClick={() => artistPageNavigate(artist)}>{artist.title}</h3>
+            {(artist.birth_date || artist.death_date) && (
+              <p>
+                {artist.birth_date} - {artist.death_date}
+              </p>
+            )}
           </div>
         ))
       }

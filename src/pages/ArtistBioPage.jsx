@@ -49,7 +49,11 @@ export default function ArtistBioPage() {
       <h1>{artistData.title}</h1>
       {/* <p>{artist.nationality}</p> */}
       <p>{artistData.birth_date} - {artistData.death_date}</p>
-      <p>{artistData.description}</p>
+      <div className="artist-description">
+        <div dangerouslySetInnerHTML={{
+          __html: artistData.description
+        }} />
+      </div>
       
       {/* // second half (highlighted works) will be from Met api */}
       <h2>Highlighted Works</h2>
