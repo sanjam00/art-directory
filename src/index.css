@@ -6,7 +6,7 @@
 }
 
 .searchResults {
-  border: 6px solid black;
+  /* border: 6px solid black; */
   /* display: flex; */
   /* flex-direction: column;
   align-items: center; */
@@ -20,7 +20,7 @@
 }
 
 .artistContainer{
-  border: 3px solid red;
+  /* border: 3px solid red; */
   display: grid;
   justify-content: space-evenly;
   grid-template-columns: repeat(2, .3fr);
@@ -33,7 +33,7 @@
   font-family: var(--custom-font-text);
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .artistCard h3{
