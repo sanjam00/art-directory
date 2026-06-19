@@ -8,21 +8,23 @@ export default function NavBar(){
     <nav className="navbar">
       <SearchBar />
 
-      <NavLink to='/'>
-        Home
+      <NavLink to='/' id="siteLogoName">
+        website name
       </NavLink>
 
-      <NavLink to='/artists'>
-        Artist
-      </NavLink>
+      <div className="nav-links">
+        <NavLink to='/artists'>
+          Artist
+        </NavLink>
 
-      <NavLink to='/artworks'>
-        Artwork
-      </NavLink>
+        <NavLink to='/artworks'>
+          Artwork
+        </NavLink>
 
-      <NavLink to='/contactpage'>
-        Contact
-      </NavLink>
+        <NavLink to='/contactpage'>
+          Contact
+        </NavLink>
+      </div>
 
     </nav>
   )

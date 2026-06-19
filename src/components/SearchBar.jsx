@@ -12,6 +12,8 @@ export default function SearchBar(){
     if (!inputText.trim()) return;
 
     navigate(`/search?q=${encodeURIComponent(inputText)}`);
+
+    setInputText('')
   }
 
   return (

@@ -1,21 +1,52 @@
 .navbar {
+  --custom-font-headers: "Posterama 2001 W04 Regular";
+  --custom-font-text: "Apercu Regular";
+  display: flex;
+  align-items: center;
   background: #c7a005;
   padding: 2em;
-  margin: -.5em;
+  margin: -.5em -.5em 0 -.5em;
+  position: relative;
 }
 
-/* links on right side, search bar on left*/
-.navbar>a {
+#siteLogoName{
+  font-family: var(--custom-font-headers);
+  font-size: 2em;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 2;
+  pointer-events: auto;
+  /* disable all animations/transitions for the logo */
+  transition: none !important;
+  animation: none !important;
+  color: #45474A;
+}
+
+/* Ensure the centered logo has no underline or animated pseudo-element */
+#siteLogoName::after {
+  display: none !important;
+}
+
+/* Also disable transitions on any children of the logo, if present */
+#siteLogoName, #siteLogoName * {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* links on right side, search bar on left */
+.navbar a {
+  font-family: var(--custom-font-text);
   position: relative;
   display: inline-block;
   padding: 1em;
   text-decoration: none;
   color: #45474A;
-  font-family: "Apercu Regular";
   transition: color 0.3s ease;
 }
 
-.navbar>a::after {
+.navbar a::after {
   content: "";
   position: absolute;
   left: 0;
@@ -28,11 +59,11 @@
   transition: transform 0.3s ease;
 }
 
-.navbar>a:hover {
+.navbar a:hover {
   color: #FFFBEB;
 }
 
-.navbar>a:hover::after {
+.navbar a:hover::after {
   transform: scaleX(1);
 }
 
@@ -57,6 +88,19 @@
   transition: border-radius 0.5s ease;
   background: var(--input-bg,#fff);
   cursor: text;
+}
+
+.nav-links{
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Ensure nav links inside .nav-links keep the same tab style */
+.nav-links .navlink,
+.nav-links a {
+  position: relative;
 }
 
 #searchbarinput{

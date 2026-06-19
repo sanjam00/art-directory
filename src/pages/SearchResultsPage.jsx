@@ -91,7 +91,7 @@ export default function SearchResultsPage({ buildArtists }){
   return(
     <div className="searchResults">
       <div className="resultsHeader" >
-        <h1>Results for "{query}"</h1>
+        <h2>Results for "{query}"</h2>
 
         <div className="tabs">
           <button onClick={() => setActiveTab("artists")}>
