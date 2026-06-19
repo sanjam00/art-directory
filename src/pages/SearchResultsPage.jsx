@@ -122,11 +122,17 @@ export default function SearchResultsPage({ buildArtists }){
         {activeTab === "artworks" &&
           objects.map(object => (
             <div key={object.objectID} className="artworkCard" onClick={() => artworkPageNavigate(object)}>
-              <img src={object.primaryImageSmall ? object.primaryImageSmall : "(No image available at this time)"} 
-                alt="(No image available at this time)"/>
-              <h3>{object.title}</h3>
-              <p>{object.artistDisplayName}</p>
-              <p>{object.objectDate}</p>
+              <img src={object.primaryImageSmall ? object.primaryImageSmall : ""}
+                alt={object.title || "Artwork image"} />
+
+              <div className="artwork-meta">
+                <div className="meta-top">
+                  <h3 className="artwork-title">{object.title}</h3>
+                  <span className="object-date">{object.objectDate}</span>
+                </div>
+
+                <div className="artist-name">{object.artistDisplayName}</div>
+              </div>
             </div>
           ))
         }
