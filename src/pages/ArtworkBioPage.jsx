@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import settings from "../settings";
+import './ArtworkBio.css'
 
 export default function ArtworkBioPage(){
   const {artworkId} = useParams();
@@ -38,20 +39,37 @@ export default function ArtworkBioPage(){
   }
 
   return (
-    <div>
-      {/* what to do if there's no primary images? */}
-      <img src={artworkData.primaryImage} />
-      <h1>{artworkData.title}</h1>
-      <h3>{artworkData.objectDate}</h3>
-      <h4>{artworkData.medium}</h4>
-      <h4>{artworkData.dimensions}</h4>
-      <h4>{artworkData.objectWikidata_URL}</h4>
-      <h4>{artworkData.period}</h4>
-      <h4>{artworkData.dynasty}</h4>
+    <div className="artworkBioPage">
+      <div className="artwork-container">
+        <div className="artwork-image">
+          <img src={artworkData.primaryImage} alt={artworkData.title} />
+        </div>
 
-      {/* add link to artist profile onClick */}
-      <h2>{artworkData.artistDisplayName}</h2> 
-      <h3>{artworkData.artistNationality}</h3>
+        <div className="artwork-info">
+          <div className="artwork-header">
+            <h1 className="artwork-title">{artworkData.title}</h1>
+            <p className="artwork-date">{artworkData.objectDate}</p>
+            <div className="artist-info">
+              <h2 className="artist-name">{artworkData.artistDisplayName}</h2>
+              <span className="artist-dash"> - </span>
+              <p className="artist-nationality">{artworkData.artistNationality}</p>
+            </div>
+          </div>
+
+          <hr className="artwork-divider" />
+
+          <div className="artwork-specs">
+            <h3>Artwork Specifications</h3>
+            {artworkData.medium && <p><strong>Medium:</strong> {artworkData.medium}</p>}
+            {artworkData.dimensions && <p><strong>Dimensions:</strong> {artworkData.dimensions}</p>}
+            {artworkData.period && <p><strong>Period:</strong> {artworkData.period}</p>}
+            {artworkData.dynasty && <p><strong>Dynasty:</strong> {artworkData.dynasty}</p>}
+            {artworkData.objectWikidata_URL && (
+              <p><a href={artworkData.objectWikidata_URL} target="_blank" rel="noopener noreferrer">View on Wikidata</a></p>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
