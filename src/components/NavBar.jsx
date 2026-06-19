@@ -13,15 +13,15 @@ export default function NavBar(){
       </NavLink>
 
       <NavLink to='/artists'>
-        Artist Page
+        Artist
       </NavLink>
 
       <NavLink to='/artworks'>
-        Artwork Page
+        Artwork
       </NavLink>
 
       <NavLink to='/contactpage'>
-        Contact Page
+        Contact
       </NavLink>
 
     </nav>

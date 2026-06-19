@@ -89,44 +89,49 @@ export default function SearchResultsPage({ buildArtists }){
   }
 
   return(
-    <div className="SearchResults">
-      <h1>Results for "{query}"</h1>
+    <div className="searchResults">
+      <div className="resultsHeader" >
+        <h1>Results for "{query}"</h1>
 
-      <div className="tabs">
-        <button onClick={() => setActiveTab("artists")}>
-          Artists
-        </button>
-        <button onClick={()=> setActiveTab("artworks")}>
-          Artworks
-        </button>
+        <div className="tabs">
+          <button onClick={() => setActiveTab("artists")}>
+            Artists
+          </button>
+          <button onClick={()=> setActiveTab("artworks")}>
+            Artworks
+          </button>
+        </div>
       </div>
 
-      {/* add dates alive */}
-      {activeTab === "artists" && 
+      <div className="artistContainer">
+        {/* add dates alive */}
+        {activeTab === "artists" && 
         artists.map(artist => (
-          <div key={artist.id} className="artistCard">
+          <div key={artist.id} className="artistCard" >
             <h3 onClick={() => artistPageNavigate(artist)}>{artist.title}</h3>
             {(artist.birth_date || artist.death_date) && (
-              <p>
-                {artist.birth_date} - {artist.death_date}
-              </p>
+              <p>{artist.birth_date} - {artist.death_date}</p>
             )}
           </div>
         ))
       }
+      </div>
 
-      {/* add navigation link (visual on hover) when click on artist name */}
-      {activeTab === "artworks" &&
-        objects.map(object => (
-          <div key={object.objectID} className="artworkCard" onClick={() => artworkPageNavigate(object)}>
-            <img src={object.primaryImageSmall ? object.primaryImageSmall : "(No image available at this time)"} 
-              alt="(No image available at this time)"/>
-            <h3>{object.title}</h3>
-            <p>{object.artistDisplayName}</p>
-          </div>
-        ))
-      }
-
+      <div className="artworkContainer">
+        {/* add navigation link (visual on hover) when click on artist name */}
+        {activeTab === "artworks" &&
+          objects.map(object => (
+            <div key={object.objectID} className="artworkCard" onClick={() => artworkPageNavigate(object)}>
+              <img src={object.primaryImageSmall ? object.primaryImageSmall : "(No image available at this time)"} 
+                alt="(No image available at this time)"/>
+              <h3>{object.title}</h3>
+              <p>{object.artistDisplayName}</p>
+              <p>{object.objectDate}</p>
+            </div>
+          ))
+        }
+      </div>
+      
     </div>
   )
 }
