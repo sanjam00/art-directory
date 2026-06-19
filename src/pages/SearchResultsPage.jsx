@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom"
 import settings from "../settings";
+import '../index.css'
 
 export default function SearchResultsPage({ buildArtists }){
   const [searchParams] = useSearchParams();

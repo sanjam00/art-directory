@@ -9,7 +9,7 @@ export default function NavBar(){
       <SearchBar />
 
       <NavLink to='/' id="siteLogoName">
-        website name
+        ArtIndex
       </NavLink>
 
       <div className="nav-links">
