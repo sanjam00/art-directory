@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import settings from "../settings";
 import { useEffect, useState } from "react";
 import './ArtistBio.css'
@@ -8,6 +8,8 @@ export default function ArtistBioPage() {
   const [artistData, setArtistData] = useState(null);
   const [works, setWorks] = useState([]);
   const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
 
   // fetch artist profile from aic api
   useEffect(() => {
@@ -67,6 +69,10 @@ export default function ArtistBioPage() {
       .catch(console.error)
   }, [artistData])
   
+  const artworkPageNavigate = (artwork) => {
+    navigate(`/artwork/${artwork.objectID}`)
+  }
+
   if (error) {
     return <p>{error}</p>
   }
@@ -101,7 +107,7 @@ export default function ArtistBioPage() {
 
       <div className="worksGrid">
         {works.map(work => (
-          <div key={work.objectID} className="workCard">
+          <div key={work.objectID} className="workCard" onClick={() => artworkPageNavigate(work)}>
             <img src={work.primaryImageSmall} alt={work.title} />
             <div className="work-meta">
               <div className="work-meta-top">
