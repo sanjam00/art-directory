@@ -59,12 +59,15 @@ export default function ArtistBioPage() {
       })
       .then((results) => {
         console.log(results)
-        const filteredWorks = results.filter(
-          work =>
-            work.artistDisplayName?.toLowerCase() === artistData.title.toLowerCase()
-        )
+        const artistName = artistData.title?.trim().toLowerCase();
+        const filteredWorks = results.filter((work) => {
+          const displayName = work.artistDisplayName?.trim().toLowerCase();
+          const alphaSort = work.artistAlphaSort?.trim().toLowerCase();
+          return displayName === artistName || alphaSort === artistName;
+        });
 
-        setWorks(filteredWorks)
+        setWorks(filteredWorks.length ? filteredWorks : results);
+
       })
       .catch(console.error)
   }, [artistData])
