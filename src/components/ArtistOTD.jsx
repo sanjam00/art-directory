@@ -10,6 +10,8 @@ export default function ArtistOTD() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log("ArtistOTD effect ran");
+
     // Fetch a random artist from the AIC API
     const fetchRandomArtist = async () => {
       try {
@@ -17,21 +19,35 @@ export default function ArtistOTD() {
         const countRes = await fetch(`${settings.aic.baseurl}/agents?limit=1`);
         if (!countRes.ok) throw new Error("Failed to fetch artist count");
         const countData = await countRes.json();
-        const totalArtists = countData.pagination?.total || 1000;
+        // const totalArtists = countData.pagination?.total || 1000;
+        const totalPages = countData.pagination.total_pages;
 
         // Generate a random offset
-        const randomOffset = Math.floor(Math.random() * Math.max(1, totalArtists - 1));
+        const randomPage = Math.floor(Math.random() * totalPages) + 1;
+
+        // console.log("Random offset:", randomOffset);
 
         // Fetch a single artist at that offset
         const artistRes = await fetch(
-          `${settings.aic.baseurl}/agents?limit=1&offset=${randomOffset}`
+          `${settings.aic.baseurl}/agents?limit=1&page=${randomPage}`
         );
         if (!artistRes.ok) throw new Error("Failed to fetch artist");
         const artistData = await artistRes.json();
+        console.log("Artist returned:", artistData.data[0]?.title);
 
         if (artistData.data && artistData.data.length > 0) {
           setArtist(artistData.data[0]);
         }
+
+        // console.log({
+        //   offset: randomOffset,
+        //   id: artistData.data[0]?.id,
+        //   title: artistData.data[0]?.title,
+        // });
+        // console.log(
+        //   `${settings.aic.baseurl}/agents?limit=1&offset=${randomOffset}`
+        // );
+
         setError(null);
       } catch (err) {
         console.error("Error fetching random artist:", err);
@@ -39,7 +55,10 @@ export default function ArtistOTD() {
       } finally {
         setLoading(false);
       }
+
     };
+    // console.log("ArtistOTD mounted");
+    // console.log("ArtistOTD rendered");
 
     fetchRandomArtist();
   }, []);

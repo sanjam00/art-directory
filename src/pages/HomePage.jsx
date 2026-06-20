@@ -1,4 +1,5 @@
 import ArtistOTD from "../components/ArtistOTD";
+import ArtworkOTD from "../components/ArtworkOTD";
 
 export default function HomePage(){
 
@@ -18,7 +19,8 @@ export default function HomePage(){
         <li>Mobile CSS styles</li>
         <li>Fix bugs regarding highlighted works</li>
       </ul>
-    <ArtistOTD />
+      <ArtistOTD />
+      <ArtworkOTD />
     </>
   )
 }
