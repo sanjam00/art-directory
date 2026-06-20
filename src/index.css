@@ -150,8 +150,9 @@ button:hover::after {
 
 .artworkCard img {
   width: 100%;
-  height: 220px;
-  object-fit: cover;
+  height: auto;
+  max-height: 220px;
+  object-fit: contain;
   display: block;
 }
 
@@ -177,7 +178,7 @@ button:hover::after {
   position: relative;
 }
 
-.artwork-title::after {
+.artwork-title-sr::after {
   content: '';
   position: absolute;
   left: 0;
@@ -190,7 +191,7 @@ button:hover::after {
   transition: transform 0.3s ease-out;
 }
 
-.artwork-title:hover::after {
+.artwork-title-sr:hover::after {
   transform: scaleX(1);
 }
 

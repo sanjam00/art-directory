@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom"
 import settings from "../settings";
 import { useEffect, useState } from "react";
+import './ArtistBio.css'
 
 export default function ArtistBioPage() {
   const {artistId} = useParams();
@@ -82,33 +83,35 @@ export default function ArtistBioPage() {
   // }
 
   return (
-    <div>
-      {/* // first half will be from AIC api: the name, date, portrait, bio, etc. */}
-      <h1>{artistData.title}</h1>
-      {/* <p>{artistData.nationality}</p> */}
-      <p>{artistData.birth_date} - {artistData.death_date}</p>
-      <div className="artist-description">
-        <div dangerouslySetInnerHTML={{
-          __html: artistData.description
-        }} />
+    <div className="artist-bio-page">
+      <div className="artist-bio-header">
+        <div className="artist-bio-left">
+          <h1>{artistData.title}</h1>
+          <p className="artist-dates">{artistData.birth_date} - {artistData.death_date}</p>
+        </div>
+
+        <div className="artist-bio-right">
+          <div className="artist-description">
+            <div dangerouslySetInnerHTML={{ __html: artistData.description }} />
+          </div>
+        </div>
       </div>
-      
-      {/* // second half (highlighted works) will be from Met api */}
-      <h2>Highlighted Works</h2>
+
+      <h2 className="section-title">Highlighted Works</h2>
 
       <div className="worksGrid">
         {works.map(work => (
           <div key={work.objectID} className="workCard">
-            <img
-              src={work.primaryImageSmall}
-              alt={work.title}
-            />
-            <h3>{work.title}</h3>
-            <p>{work.objectDate}</p>
+            <img src={work.primaryImageSmall} alt={work.title} />
+            <div className="work-meta">
+              <div className="work-meta-top">
+                <h3>{work.title}</h3>
+                <p className="work-date">{work.objectDate}</p>
+              </div>
+            </div>
           </div>
         ))}
       </div>
-
     </div>
   )
 }
