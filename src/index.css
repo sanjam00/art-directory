@@ -169,7 +169,7 @@ button:hover::after {
   gap: 0.5rem;
 }
 
-.artwork-title {
+.artwork-title-sr {
   font-size: 1rem;
   margin: 0;
   color: #222;
@@ -194,14 +194,14 @@ button:hover::after {
   transform: scaleX(1);
 }
 
-.object-date {
+.object-date-sr {
   font-size: 0.9rem;
   color: #666;
   margin-left: 0.5rem;
   white-space: nowrap;
 }
 
-.artist-name {
+.artist-name-sr {
   margin-top: 0.5rem;
   font-size: 0.95rem;
   color: #555;

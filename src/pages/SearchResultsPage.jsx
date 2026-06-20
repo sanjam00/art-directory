@@ -20,7 +20,7 @@ export default function SearchResultsPage({ buildArtists }){
 
     fetch(`${settings.met.baseurl}/search?q=${query}`)
     .then(r => {
-      if (!r.ok) {throw new Error("Failed to fetch")}
+      if (!r.ok) {throw new Error("Failed to fetch from met")}
       return r.json();
     })
     .then(data => {
@@ -32,7 +32,7 @@ export default function SearchResultsPage({ buildArtists }){
         ids.map(id =>
           fetch(`${settings.met.baseurl}/objects/${id}`)
           .then(r => {
-            if (!r.ok) { throw new Error("Failed to fetch") }
+            if (!r.ok) { throw new Error("Failed to fetch from met") }
             return r.json();
           })
         )
@@ -51,13 +51,11 @@ export default function SearchResultsPage({ buildArtists }){
   useEffect(() => {
     fetch(`${settings.aic.baseurl}/agents/search?q=${query}`)
     .then((r) => {
-      if (!r.ok) { throw new Error("Failed to fetch.") }
+      if (!r.ok) { throw new Error("Failed to fetch from aic") }
       return r.json()
     })
     .then((data) => {
       console.log("Artist data from the AIC API: ", data)
-      // store artist results in state
-      // setArtists(data.data)
       const artistsData = data.data || [];
       const ids = artistsData.map((artist) => artist.id);
 
@@ -65,7 +63,7 @@ export default function SearchResultsPage({ buildArtists }){
         ids.map((id) =>
           fetch(`${settings.aic.baseurl}/agents/${id}`)
           .then((r) => {
-            if (!r.ok) { throw new Error("Failed to fetch.") }
+            if (!r.ok) { throw new Error("Failed to fetch from aic") }
             return r.json()
           })
         )
@@ -128,11 +126,11 @@ export default function SearchResultsPage({ buildArtists }){
 
               <div className="artwork-meta">
                 <div className="meta-top">
-                  <h3 className="artwork-title">{object.title}</h3>
-                  <span className="object-date">{object.objectDate}</span>
+                  <h3 className="artwork-title-sr">{object.title}</h3>
+                  <span className="object-date-sr">{object.objectDate}</span>
                 </div>
 
-                <div className="artist-name">{object.artistDisplayName}</div>
+                <div className="artist-name-sr">{object.artistDisplayName}</div>
               </div>
             </div>
           ))
