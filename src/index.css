@@ -242,15 +242,22 @@ button:hover::after {
   text-align: left;
 }
 
-.page-content-ap {
-  text-align: center;
-}
-
 .page-section {
   margin-bottom: 1.75rem;
   font-family: var(--custom-font-text);
 }
 
+/* Page content specific to Artists Page and Artworks Page */
+.page-content-ap {
+  font-family: var(--custom-font-text);
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* About Button on Home Page */
 /* .about-toggle-button {
   font-family: var(--custom-font-text);
   font-size: 1rem;
