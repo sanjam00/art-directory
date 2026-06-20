@@ -257,24 +257,6 @@ button:hover::after {
   text-align: center;
 }
 
-/* About Button on Home Page */
-/* .about-toggle-button {
-  font-family: var(--custom-font-text);
-  font-size: 1rem;
-  padding: 0.85rem 1.25rem;
-  border: none;
-  border-radius: 999px;
-  background-color: #826c8e;
-  color: #ffffff;
-  cursor: pointer;
-  transition: background-color 0.25s ease, transform 0.2s ease;
-} */
-
-.about-toggle-button:hover {
-  /* background-color: #6f5678; */
-  transform: translateY(-1px);
-}
-
 .about-content {
   max-height: 0;
   overflow: hidden;
@@ -295,4 +277,88 @@ button:hover::after {
 .about-content ul {
   list-style: disc inside;
   padding-left: 1rem;
+}
+
+/* Contact Page */
+.page-content {
+  font-family: var(--custom-font-text);
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+  box-sizing: border-box;
+}
+
+.page-content h1 {
+  text-align: center;
+  margin-bottom: 1.15rem;
+}
+
+.page-content p,
+.page-content ul,
+.page-content li,
+.page-content h4,
+.page-content h5 {
+  text-align: left;
+}
+
+.contact-page p {
+  max-width: 760px;
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  max-width: 720px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 600;
+}
+
+.form-input,
+.form-textarea {
+  font-family: var(--custom-font-text);
+  font-size: 1rem;
+  padding: 0.95rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  border-color: #826c8e;
+  box-shadow: 0 0 0 3px rgba(130, 108, 142, 0.12);
+}
+
+.form-textarea {
+  min-height: 180px;
+  resize: vertical;
+}
+
+.form-submit {
+  width: fit-content;
+  background-color: #826c8e;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.95rem 1.6rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.form-submit:hover {
+  background-color: #6f5678;
+  transform: translateY(-1px);
 }

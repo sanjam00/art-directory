@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import settings from "../settings";
 import './ArtworkBio.css'
 
@@ -7,6 +7,8 @@ export default function ArtworkBioPage(){
   const {artworkId} = useParams();
   const [artworkData, setArtworkData] = useState(null);
   const [error, setError] = useState(null);
+
+  // const navigat = useNavigate();
 
   // fetch artwork profile from met api
   useEffect(() => {
@@ -27,6 +29,10 @@ export default function ArtworkBioPage(){
       setError("Failed to load artist details");
     })
   }, [artworkId])
+
+  // const artistPageNavigate = (artist) => {
+  //   navigate(`/artwork/${artist.objectID}`)
+  // }
   
   if (error) {
     return <p>{error}</p>
@@ -50,7 +56,7 @@ export default function ArtworkBioPage(){
             <h1 className="artwork-title">{artworkData.title}</h1>
             <p className="artwork-date">{artworkData.objectDate}</p>
             <div className="artist-info">
-              <h2 className="artist-name">{artworkData.artistDisplayName}</h2>
+              <h2 className="artist-name" onClick={() => artworkPageNavigate}>{artworkData.artistDisplayName}</h2>
               <span className="artist-dash"> - </span>
               <p className="artist-nationality">{artworkData.artistNationality}</p>
             </div>
