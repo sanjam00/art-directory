@@ -5,6 +5,8 @@
   color: #45474A;
 }
 
+/* Search Results */
+
 .searchResults {
   /* border: 2px solid black; */
   padding: 0 1.25rem 2rem;
@@ -216,4 +218,74 @@ button:hover::after {
 @media (max-width: 600px) {
   .artworkContainer { grid-template-columns: 1fr; }
   .artworkCard img { height: 180px; }
+}
+
+/* Home, Arist, and Artworks pages */
+.page-content {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+  box-sizing: border-box;
+}
+
+.page-content h1 {
+  font-family: var(--custom-font-text);
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+
+.page-content h4,
+.page-content h5,
+.page-content p,
+.page-content ul,
+.page-content li {
+  text-align: left;
+}
+
+.page-content-ap {
+  text-align: center;
+}
+
+.page-section {
+  margin-bottom: 1.75rem;
+  font-family: var(--custom-font-text);
+}
+
+/* .about-toggle-button {
+  font-family: var(--custom-font-text);
+  font-size: 1rem;
+  padding: 0.85rem 1.25rem;
+  border: none;
+  border-radius: 999px;
+  background-color: #826c8e;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.2s ease;
+} */
+
+.about-toggle-button:hover {
+  /* background-color: #6f5678; */
+  transform: translateY(-1px);
+}
+
+.about-content {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.35s ease, opacity 0.25s ease;
+}
+
+.about-content.open {
+  max-height: 1000px;
+  opacity: 1;
+}
+
+.about-content p,
+.about-content ul {
+  margin-top: 1rem;
+}
+
+.about-content ul {
+  list-style: disc inside;
+  padding-left: 1rem;
 }
