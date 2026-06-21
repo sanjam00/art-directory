@@ -111,7 +111,11 @@ export default function ArtistBioPage() {
       <div className="worksGrid">
         {works.map(work => (
           <div key={work.objectID} className="workCard" onClick={() => artworkPageNavigate(work)}>
-            <img src={work.primaryImageSmall} alt={work.title} />
+            <img
+              src={work.primaryImageSmall || settings.placeholder_img}
+              alt={work.title || "Artwork image"}
+              onError={(e) => { e.currentTarget.src = settings.placeholder_img; }}
+            />
             <div className="work-meta">
               <div className="work-meta-top">
                 <h3>{work.title}</h3>

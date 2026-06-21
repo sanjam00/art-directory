@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router";
 import settings from "../settings";
 import './ArtworkBio.css'
 
+
 export default function ArtworkBioPage(){
   const {artworkId} = useParams();
   const [artworkData, setArtworkData] = useState(null);
@@ -48,7 +49,11 @@ export default function ArtworkBioPage(){
     <div className="artworkBioPage">
       <div className="artwork-container">
         <div className="artwork-image">
-          <img src={artworkData.primaryImage} alt={artworkData.title} />
+          <img
+            src={artworkData.primaryImage || settings.placeholder_img}
+            alt={artworkData.title || "Artwork image"}
+            onError={(e) => { e.currentTarget.src = settings.placeholder_img; }}
+          />
         </div>
 
         <div className="artwork-info">

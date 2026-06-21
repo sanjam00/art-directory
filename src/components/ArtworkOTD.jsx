@@ -71,13 +71,12 @@ export default function ArtworkOTD() {
         <h3>Artwork of the Day</h3>
       </div>
       <div className="artwork-otd-card" onClick={handleArtworkClick}>
-        {artwork.primaryImageSmall || artwork.primaryImage ? (
-          <img
-            className="artwork-otd-image"
-            src={artwork.primaryImageSmall || artwork.primaryImage}
-            alt={artwork.title}
-          />
-        ) : null}
+        <img
+          className="artwork-otd-image"
+          src={artwork.primaryImageSmall || artwork.primaryImage || settings.placeholder_img}
+          alt={artwork.title || "Artwork image"}
+          onError={(e) => { e.currentTarget.src = settings.placeholder_img; }}
+        />
         <div className="artwork-otd-content">
           <h4>{artwork.title || "Untitled"}</h4>
           <div className="artwork-otd-meta">

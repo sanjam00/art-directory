@@ -121,8 +121,11 @@ export default function SearchResultsPage({ buildArtists }){
         {activeTab === "artworks" &&
           objects.map(object => (
             <div key={object.objectID} className="artworkCard" onClick={() => artworkPageNavigate(object)}>
-              <img src={object.primaryImageSmall ? object.primaryImageSmall : ""}
-                alt={object.title || "Artwork image"} />
+              <img
+                src={object.primaryImageSmall || settings.placeholder_img}
+                alt={object.title || "Artwork image"}
+                onError={(e) => { e.currentTarget.src = settings.placeholder_img; }}
+              />
 
               <div className="artwork-meta">
                 <div className="meta-top">
