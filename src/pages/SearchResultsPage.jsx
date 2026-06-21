@@ -25,7 +25,7 @@ export default function SearchResultsPage({ buildArtists }){
     })
     .then(data => {
       console.log("Artwork objectIDs from Met API: ", data)
-      const ids = data.objectIDs.slice(0, 10) || [];
+      const ids = data.objectIDs.slice(0, 20) || [];
 
       // must use second fetch bc first returns only objectIDs
       return Promise.all(

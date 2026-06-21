@@ -8,7 +8,7 @@ export default function ArtworkBioPage(){
   const [artworkData, setArtworkData] = useState(null);
   const [error, setError] = useState(null);
 
-  // const navigat = useNavigate();
+  // const navigate = useNavigate();
 
   // fetch artwork profile from met api
   useEffect(() => {

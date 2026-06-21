@@ -2,6 +2,7 @@ import { useState } from "react";
 import '../index.css'
 
 export default function ContactPage(){
+  const [result, setResult] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -17,12 +18,18 @@ export default function ContactPage(){
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const recipient = "your-email@example.com";
-    const subject = encodeURIComponent(formData.subject || "Contact from ArtIndex");
-    const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`);
-    window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    formData.append("access_key", "d374370b-c523-4b65-b1db-3822e657b91e");
+
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: formData
+    });
+
+    const data = await response.json();
+    setResult(data.success ? "Success!" : "Error");
   };
 
   return (
@@ -30,7 +37,7 @@ export default function ContactPage(){
       <h1>Contact</h1>
       <p>Send a message directly from the contact page. Your browser email client will open so you can send it straight to me.</p>
 
-      <form className="contact-form" onSubmit={handleSubmit}>
+      <form className="contact-form" onSubmit={onSubmit}>
         <div className="form-group">
           <label htmlFor="name">Name *</label>
           <input
@@ -86,6 +93,7 @@ export default function ContactPage(){
         </div>
 
         <button type="submit" className="form-submit">Send Message</button>
+        <span>{result}</span>
       </form>
     </div>
   )
