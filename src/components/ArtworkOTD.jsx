@@ -46,7 +46,7 @@ export default function ArtworkOTD() {
         setError(null);
       } catch (err) {
         console.error("Error fetching artwork of the day:", err);
-        setError("Failed to load artwork of the day");
+        setError(settings.error_msg);
       } finally {
         setLoading(false);
       }

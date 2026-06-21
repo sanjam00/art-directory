@@ -9,10 +9,16 @@ export default function SearchResultsPage({ buildArtists }){
 
   const [objects, setObjects] = useState([]);
   const [artists, setArtists] = useState([]);
+  const [error, setError] = useState(null);
 
   const [activeTab, setActiveTab] = useState("artists");
   
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!query) return;
+    setError(null);
+  }, [query]);
 
   // fetch artwork list
   useEffect(() => {
@@ -43,12 +49,19 @@ export default function SearchResultsPage({ buildArtists }){
 
       // store artwork results in state
       setObjects(results);
+      setError(null);
     })
-    .catch(console.error)
+    .catch((err) => {
+      console.error(err);
+      setError(settings.error_msg);
+    })
   }, [query])
 
   // fetch artist list
   useEffect(() => {
+    if (!query) return;
+    setError(null);
+
     fetch(`${settings.aic.baseurl}/agents/search?q=${query}`)
     .then((r) => {
       if (!r.ok) { throw new Error("Failed to fetch from aic") }
@@ -75,8 +88,12 @@ export default function SearchResultsPage({ buildArtists }){
       );
 
       setArtists(detailedArtists);
+      setError(null);
     })
-    .catch(console.error)
+    .catch((err) => {
+      console.error(err);
+      setError(settings.error_msg);
+    })
   }, [query])
 
   const artistPageNavigate = (artist) => {
@@ -101,6 +118,12 @@ export default function SearchResultsPage({ buildArtists }){
           </button>
         </div>
       </div>
+
+      {error && (
+        <div className="errorBanner">
+          <p>{error}</p>
+        </div>
+      )}
 
       <div className="artistContainer">
         {/* add dates alive */}

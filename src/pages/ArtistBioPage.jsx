@@ -29,7 +29,7 @@ export default function ArtistBioPage() {
     })
     .catch((error) => {
       console.error(error);
-      setError("Failed to load artist details");
+      setError(settings.error_msg);
     })
   }, [artistId])
 
@@ -59,6 +59,7 @@ export default function ArtistBioPage() {
       })
       .then((results) => {
         console.log(results)
+        setError(null);
         const artistName = artistData.title?.trim().toLowerCase();
         const filteredWorks = results.filter((work) => {
           const displayName = work.artistDisplayName?.trim().toLowerCase();

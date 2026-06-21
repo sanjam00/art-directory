@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router";
 import settings from "../settings";
 import './ArtworkBio.css'
 
-
 export default function ArtworkBioPage(){
   const {artworkId} = useParams();
   const [artworkData, setArtworkData] = useState(null);
@@ -27,7 +26,7 @@ export default function ArtworkBioPage(){
     })
     .catch((error) => {
       console.error(error);
-      setError("Failed to load artist details");
+      setError(settings.error_msg);
     })
   }, [artworkId])
 
