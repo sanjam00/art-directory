@@ -1,0 +1,139 @@
+.artist-bio-page {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 1rem;
+	box-sizing: border-box;
+	font-family: var(--custom-font-text);
+	color: var(--text-color, #222);
+}
+
+.artist-bio-header {
+	position: relative;
+	display: grid;
+	grid-template-columns: 35% 65%;
+	gap: 2rem;
+	align-items: start;
+	margin-bottom: 2.5rem;
+}
+
+.artist-bio-header::before {
+  content: '';
+  position: absolute;
+  left: 35%;
+  transform: translateX(50%);
+  width: 4px;
+	top: 24px;
+	height: calc(100% - 24px);
+  background-color: #826c8e;
+  border-radius: 999px;
+  z-index: 0;
+}
+
+.artist-bio-left h1 {
+  padding: 1rem 0;
+	font-size: 2rem;
+}
+
+.artist-dates {
+	margin: 0;
+	color: #666;
+}
+
+.artist-bio-left,
+.artist-bio-right {
+  position: relative;
+  z-index: 1;
+}
+
+.artist-bio-right .artist-description {
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.artist-bio-right .artist-description a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.section-title {
+	margin-top: 1.5rem;
+	font-size: 1.25rem;
+	position: relative;
+	padding-bottom: 1.5rem;
+}
+
+.section-title::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 120px;
+	height: 3px;
+	background-color: #826c8e;
+	border-radius: 999px;
+}
+
+.worksGrid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1rem;
+	margin-top: 1rem;
+}
+
+.workCard {
+	background: #ffffff;
+	border-radius: 8px;
+	box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+	overflow: hidden;
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+}
+
+.workCard img {
+	width: 100%;
+	height: auto;
+	max-height: 180px;
+	object-fit: contain;
+	display: block;
+}
+
+.work-meta {
+	padding: 0.75rem 1rem 1rem 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+}
+
+.work-meta-top {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 0.5rem;
+}
+
+.work-meta h3 {
+	font-size: 1rem;
+	margin: 0;
+	color: #222;
+	flex: 1 1 auto;
+}
+
+.work-date {
+	margin: 0;
+	color: #666;
+	font-size: 0.9rem;
+	white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+	.artist-bio-header { grid-template-columns: 1fr; }
+	.worksGrid { grid-template-columns: repeat(2, 1fr); }
+  .artist-bio-header::before { display: none; }
+}
+
+@media (max-width: 600px) {
+	.worksGrid { grid-template-columns: 1fr; }
+	.artist-bio-right .artist-description::before { left: 0; top: -8px; width: 48px; }
+}
+

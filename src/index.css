@@ -1,0 +1,360 @@
+:root {
+  --custom-font-headers: "Posterama 2001 W04 Regular", Garamond, serif;
+  --custom-font-text: "Apercu Regular", "Trebuchet MS", sans-serif;
+  background-color: #fdfdfd;
+  color: #45474A;
+}
+
+/* Search Results */
+
+.searchResults {
+  padding: 0 1.25rem 2rem;
+  box-sizing: border-box;
+}
+
+.resultsHeader{
+  font-family: var(--custom-font-text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.tabs {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 1200px;
+  padding-bottom: 0.35rem;
+  margin: 0.5rem auto 1.5rem;
+}
+
+.tabs::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.25rem;
+  height: 3px;
+  border-radius: 999px;
+  background-color: #826c8e;
+}
+
+button {
+  font-family: var(--custom-font-text);
+  font-size: 1.3rem;
+  position: relative;
+  padding: .5em 1em;
+  margin: .25em;
+  background-color: #fdfdfd;
+  color: #C7A005;
+  border: none;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+button::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #826c8e;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+button:hover {
+  color: #7D7283;
+  transform: translateY(-1px);
+  cursor: pointer;
+}
+
+button:hover::after {
+  transform: scaleX(1);
+}
+
+/* Artist cards for SR */
+.artistContainer{
+  display: grid;
+  justify-content: space-evenly;
+  grid-template-columns: repeat(2, .3fr);
+  grid-auto-flow: row;
+  /* gap: 1em; */
+}
+
+.artistCard{
+  font-family: var(--custom-font-text);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.artistCard h3{
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* Create the line animation beneath text */
+.artistCard h3::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #826c8e;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease-out;
+}
+
+/* Scale the line to full width on hover */
+.artistCard h3:hover::after {
+  transform: scaleX(1);
+}
+
+/* Artwork cards for SR */
+.artworkCard {
+  font-family: var(--custom-font-text);
+}
+
+.artworkContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.artworkCard {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.artworkCard img {
+  width: 100%;
+  height: auto;
+  max-height: 220px;
+  object-fit: contain;
+  display: block;
+}
+
+.artwork-meta {
+  padding: 1rem 1.25rem 1.25rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.meta-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.artwork-title-sr {
+  font-size: 1rem;
+  margin: 0;
+  color: #222;
+  flex: 1 1 auto;
+  position: relative;
+}
+
+.artwork-title-sr::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 2px;
+  background-color: #826c8e;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease-out;
+}
+
+.artwork-title-sr:hover::after {
+  transform: scaleX(1);
+}
+
+.object-date-sr {
+  font-size: 0.9rem;
+  color: #666;
+  margin-left: 0.5rem;
+  white-space: nowrap;
+}
+
+.artist-name-sr {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* Responsive: 2 columns on medium, 1 column on small screens */
+@media (max-width: 900px) {
+  .artworkContainer { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .artworkContainer { grid-template-columns: 1fr; }
+  .artworkCard img { height: 180px; }
+}
+
+/* Home, Arist, and Artworks pages */
+.page-content {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+  box-sizing: border-box;
+}
+
+.page-content h1 {
+  font-family: var(--custom-font-text);
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+
+.page-content h4,
+.page-content h5,
+.page-content p,
+.page-content ul,
+.page-content li {
+  text-align: left;
+}
+
+.page-section {
+  margin-bottom: 1.75rem;
+  font-family: var(--custom-font-text);
+}
+
+/* page content specific to artists Page and artworks Page */
+.page-content-ap {
+  font-family: var(--custom-font-text);
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.about-content {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.35s ease, opacity 0.25s ease;
+}
+
+.about-content.open {
+  max-height: 1000px;
+  opacity: 1;
+}
+
+.about-content p,
+.about-content ul {
+  margin-top: 1rem;
+}
+
+.about-content ul {
+  list-style: disc inside;
+  padding-left: 1rem;
+}
+
+/* Contact Page */
+.page-content {
+  font-family: var(--custom-font-text);
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+  box-sizing: border-box;
+}
+
+.page-content h1 {
+  text-align: center;
+  margin-bottom: 1.15rem;
+}
+
+.page-content p,
+.page-content ul,
+.page-content li,
+.page-content h4,
+.page-content h5 {
+  text-align: left;
+}
+
+.contact-page p {
+  max-width: 760px;
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  max-width: 720px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 600;
+}
+
+.form-input,
+.form-textarea {
+  font-family: var(--custom-font-text);
+  font-size: 1rem;
+  padding: 0.95rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  border-color: #826c8e;
+  box-shadow: 0 0 0 3px rgba(130, 108, 142, 0.12);
+}
+
+.form-textarea {
+  min-height: 180px;
+  resize: vertical;
+}
+
+.form-submit {
+  width: fit-content;
+  background-color: #826c8e;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.95rem 1.6rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.form-submit:hover {
+  background-color: #6f5678;
+  transform: translateY(-1px);
+}

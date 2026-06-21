@@ -1,0 +1,167 @@
+import { useEffect, useState } from "react";
+import { useSearchParams, useNavigate } from "react-router-dom"
+import settings from "../settings";
+import '../index.css'
+
+export default function SearchResultsPage({ buildArtists }){
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get("q");
+
+  const [objects, setObjects] = useState([]);
+  const [artists, setArtists] = useState([]);
+  const [error, setError] = useState(null);
+
+  const [activeTab, setActiveTab] = useState("artists");
+  
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!query) return;
+    setError(null);
+  }, [query]);
+
+  // fetch artwork list
+  useEffect(() => {
+    if (!query) return;
+
+    fetch(`${settings.met.baseurl}/search?q=${query}`)
+    .then(r => {
+      if (!r.ok) {throw new Error("Failed to fetch from met")}
+      return r.json();
+    })
+    .then(data => {
+      console.log("Artwork objectIDs from Met API: ", data)
+      const ids = data.objectIDs.slice(0, 20) || [];
+
+      // must use second fetch bc first returns only objectIDs
+      return Promise.all(
+        ids.map(id =>
+          fetch(`${settings.met.baseurl}/objects/${id}`)
+          .then(r => {
+            if (!r.ok) { throw new Error("Failed to fetch from met") }
+            return r.json();
+          })
+        )
+      )
+    })
+    .then((results) => {
+      console.log("Artwork details: ", results)
+
+      // store artwork results in state
+      setObjects(results);
+      setError(null);
+    })
+    .catch((err) => {
+      console.error(err);
+      setError(settings.error_msg);
+    })
+  }, [query])
+
+  // fetch artist list
+  useEffect(() => {
+    if (!query) return;
+    setError(null);
+
+    fetch(`${settings.aic.baseurl}/agents/search?q=${query}`)
+    .then((r) => {
+      if (!r.ok) { throw new Error("Failed to fetch from aic") }
+      return r.json()
+    })
+    .then((data) => {
+      console.log("Artist data from the AIC API: ", data)
+      const artistsData = data.data || [];
+      const ids = artistsData.map((artist) => artist.id);
+
+      return Promise.all(
+        ids.map((id) =>
+          fetch(`${settings.aic.baseurl}/agents/${id}`)
+          .then((r) => {
+            if (!r.ok) { throw new Error("Failed to fetch from aic") }
+            return r.json()
+          })
+        )
+      )
+    })
+    .then((results) => {
+      const detailedArtists = results.map(
+        result => result.data
+      );
+
+      setArtists(detailedArtists);
+      setError(null);
+    })
+    .catch((err) => {
+      console.error(err);
+      setError(settings.error_msg);
+    })
+  }, [query])
+
+  // navigates to artist or artwork bio page
+  const artistPageNavigate = (artist) => {
+    navigate(`/artist/${artist.id}`);
+  }
+  const artworkPageNavigate = (artwork) => {
+    navigate(`/artwork/${artwork.objectID}`)
+  }
+
+  return(
+    <div className="searchResults">
+      <div className="resultsHeader" >
+        <h2 style={{padding: '1em'}}>Results for "{query}"</h2>
+
+        <div className="tabs">
+          <button onClick={() => setActiveTab("artists")}>
+            Artists
+          </button>
+          <button onClick={()=> setActiveTab("artworks")}>
+            Artworks
+          </button>
+        </div>
+      </div>
+
+      {error && (
+        <div className="errorBanner">
+          <p>{error}</p>
+        </div>
+      )}
+
+      <div className="artistContainer">
+        {/* add dates alive */}
+        {activeTab === "artists" && 
+        artists.map(artist => (
+          <div key={artist.id} className="artistCard" >
+            <h3 onClick={() => artistPageNavigate(artist)}>{artist.title}</h3>
+            {(artist.birth_date || artist.death_date) && (
+              <p>{artist.birth_date} - {artist.death_date}</p>
+            )}
+          </div>
+        ))
+      }
+      </div>
+
+      <div className="artworkContainer">
+        {activeTab === "artworks" &&
+          objects.map(object => (
+            <div key={object.objectID} className="artworkCard" onClick={() => artworkPageNavigate(object)}>
+              <img
+                src={object.primaryImageSmall || settings.placeholder_img}
+                alt={object.title || "Artwork image"}
+                onError={(e) => { e.currentTarget.src = settings.placeholder_img; }}
+              />
+
+              <div className="artwork-meta">
+                <div className="meta-top">
+                  <h3 className="artwork-title-sr">{object.title}</h3>
+                  <span className="object-date-sr">{object.objectDate}</span>
+                </div>
+
+                <div className="artist-name-sr">{object.artistDisplayName}</div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+      
+    </div>
+  )
+}

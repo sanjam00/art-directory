@@ -1,0 +1,67 @@
+.artist-otd {
+  max-width: 400px;
+  margin: 1rem auto;
+  font-family: var(--custom-font-text);
+}
+
+.artist-otd-header {
+  text-align: center;
+  margin-bottom: 0.75rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.artist-otd-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #45474A;
+}
+
+.artist-otd-header h3::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  width: 80px;
+  height: 3px;
+  background-color: #826c8e;
+  border-radius: 999px;
+}
+
+.artist-otd-card {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.artist-otd-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.artist-otd-content {
+  text-align: center;
+}
+
+.artist-otd-content h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  color: #222;
+}
+
+.artist-otd-dates {
+  margin: 0.25rem 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.artist-otd-nationality {
+  margin: 0.5rem 0 0 0;
+  color: #555;
+  font-size: 0.85rem;
+  font-style: italic;
+}

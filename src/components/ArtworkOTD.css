@@ -1,0 +1,81 @@
+.artwork-otd {
+  max-width: 420px;
+  margin: 1rem auto;
+  font-family: var(--custom-font-text);
+}
+
+.artwork-otd-header {
+  text-align: center;
+  margin-bottom: 0.75rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.artwork-otd-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #45474A;
+}
+
+.artwork-otd-header h3::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  width: 80px;
+  height: 3px;
+  background-color: #826c8e;
+  border-radius: 999px;
+}
+
+.artwork-otd-card {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.artwork-otd-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.artwork-otd-image {
+  width: 100%;
+  height: auto;
+  max-height: 220px;
+  object-fit: contain;
+  display: block;
+  background: #f6f4f7;
+}
+
+.artwork-otd-content {
+  padding: 1rem;
+}
+
+.artwork-otd-content h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.05rem;
+  color: #222;
+}
+
+.artwork-otd-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+.artwork-otd-artist,
+.artwork-otd-date {
+  margin: 0;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.artwork-otd-artist {
+  font-weight: 600;
+}

@@ -1,25 +1,30 @@
 import { NavLink } from "react-router"
+import SearchBar from "./SearchBar"
+import "./NavBar.css"
 
 export default function NavBar(){
 
   return (
-    <nav className="NavBar">
+    <nav className="navbar">
+      <SearchBar />
 
-      <NavLink to='/'>
-        Home
+      <NavLink to='/' id="siteLogoName">
+        ArtIndex
       </NavLink>
 
-      <NavLink to='/artistpage'>
-        Artist Page
-      </NavLink>
+      <div className="nav-links">
+        <NavLink to='/artists'>
+          Artist
+        </NavLink>
 
-      <NavLink to='/artworkpage'>
-        Artwork Page
-      </NavLink>
+        <NavLink to='/artworks'>
+          Artwork
+        </NavLink>
 
-      <NavLink to='/contactpage'>
-        Contact Page
-      </NavLink>
+        <NavLink to='/contactpage'>
+          Contact
+        </NavLink>
+      </div>
 
     </nav>
   )
