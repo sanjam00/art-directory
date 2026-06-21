@@ -78,7 +78,7 @@ See API documentation for more information:
 ---
 
 ## Project Structure
-- **src:** : Application source
+- **src:** Application source
 	- **components/** : Reusable components (ArtworkOTD, ArtworkOTD.css, ArtworkOTD.jsx, NavBar, SearchBar, etc.)
 	- **pages/** : Route pages (HomePage, ArtistsPage, ArtworksPage, ArtworkBioPage, ArtistBioPage, SearchResultsPage)
 	- **main.jsx / App.jsx** : App entry and routes
