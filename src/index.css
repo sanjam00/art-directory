@@ -1,6 +1,6 @@
 :root {
-  --custom-font-headers: "Posterama 2001 W04 Regular";
-  --custom-font-text: "Apercu Regular";
+  --custom-font-headers: "Posterama 2001 W04 Regular", Garamond, serif;
+  --custom-font-text: "Apercu Regular", "Trebuchet MS", sans-serif;
   background-color: #fdfdfd;
   color: #45474A;
 }
@@ -8,7 +8,6 @@
 /* Search Results */
 
 .searchResults {
-  /* border: 2px solid black; */
   padding: 0 1.25rem 2rem;
   box-sizing: border-box;
 }
@@ -80,8 +79,8 @@ button:hover::after {
   transform: scaleX(1);
 }
 
+/* Artist cards for SR */
 .artistContainer{
-  /* border: 3px solid red; */
   display: grid;
   justify-content: space-evenly;
   grid-template-columns: repeat(2, .3fr);
@@ -90,7 +89,6 @@ button:hover::after {
 }
 
 .artistCard{
-  /* border: 3px solid black; */
   font-family: var(--custom-font-text);
   display: flex;
   align-items: center;
@@ -104,7 +102,7 @@ button:hover::after {
   cursor: pointer;
 }
 
-/* Create the invisible line beneath the text */
+/* Create the line animation beneath text */
 .artistCard h3::after {
   content: '';
   position: absolute;
@@ -123,12 +121,11 @@ button:hover::after {
   transform: scaleX(1);
 }
 
-.artworkCard
-{
+/* Artwork cards for SR */
+.artworkCard {
   font-family: var(--custom-font-text);
 }
 
-/* Grid container: 3 cards per row */
 .artworkContainer {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -139,7 +136,6 @@ button:hover::after {
   width: 100%;
 }
 
-/* Individual card */
 .artworkCard {
   background: #ffffff;
   border-radius: 8px;
@@ -247,7 +243,7 @@ button:hover::after {
   font-family: var(--custom-font-text);
 }
 
-/* Page content specific to Artists Page and Artworks Page */
+/* page content specific to artists Page and artworks Page */
 .page-content-ap {
   font-family: var(--custom-font-text);
   max-width: 980px;

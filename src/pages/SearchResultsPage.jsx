@@ -96,10 +96,10 @@ export default function SearchResultsPage({ buildArtists }){
     })
   }, [query])
 
+  // navigates to artist or artwork bio page
   const artistPageNavigate = (artist) => {
     navigate(`/artist/${artist.id}`);
   }
-
   const artworkPageNavigate = (artwork) => {
     navigate(`/artwork/${artwork.objectID}`)
   }
@@ -140,7 +140,6 @@ export default function SearchResultsPage({ buildArtists }){
       </div>
 
       <div className="artworkContainer">
-        {/* add navigation link (visual on hover) when click on artist name */}
         {activeTab === "artworks" &&
           objects.map(object => (
             <div key={object.objectID} className="artworkCard" onClick={() => artworkPageNavigate(object)}>

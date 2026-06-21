@@ -18,6 +18,7 @@ export default function ContactPage(){
     }));
   };
 
+  // using web3forms.com to submit responses
   const onSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);

@@ -87,12 +87,9 @@ export default function ArtistBioPage() {
   if (!artistData) {
     return <p>Loading artist details ...</p>
   }
-  
-  // if (!works) {
-  //   return <p>Loading artist details ...</p>
-  // }
 
   return (
+    // artist info
     <div className="artist-bio-page">
       <div className="artist-bio-header">
         <div className="artist-bio-left">
@@ -107,6 +104,7 @@ export default function ArtistBioPage() {
         </div>
       </div>
 
+      {/* highlighted works */}
       <h2 className="section-title">Highlighted Works</h2>
 
       <div className="worksGrid">

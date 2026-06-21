@@ -11,9 +11,5 @@ const settings = {
   "error_msg": "Failed to load resource. Please try again in a few minutes",
 };
 
-// storing default values, like how many strings to concatenate. things your want to customize
-// functions that are used often
-
-
 export default settings;
 

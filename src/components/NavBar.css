@@ -24,18 +24,17 @@
   color: #45474A;
 }
 
-/* Ensure the centered logo has no underline or animated pseudo-element */
+/* ensure the centered logo has no underline or animated pseudo-element */
 #siteLogoName::after {
   display: none !important;
 }
 
-/* Also disable transitions on any children of the logo, if present */
+/* disable transitions on any children of the logo, if present */
 #siteLogoName, #siteLogoName * {
   transition: none !important;
   animation: none !important;
 }
 
-/* links on right side, search bar on left */
 .navbar a {
   font-family: var(--custom-font-text);
   position: relative;
@@ -110,7 +109,7 @@
   width: 130%; /* unclip the placeholder text*/
   height: 100%;
   padding-inline: 0.5em;
-  padding-block: 0; /* remove extra vertical padding so text isn't clipped */
+  padding-block: 0;
   border: none;
   box-sizing: border-box; /* include padding in width/height calculations */
   line-height: var(--height-of-input); /* vertically center placeholder/text */
@@ -144,13 +143,3 @@
 .searchbar:focus-within:before {
   transform: scale(1);
 }
-
-/* .searchbarinput:not(:placeholder-shown) ~ .reset {
-  opacity: 1;
-  visibility: visible;
-}
-/* sizing svg icons */
-.searchbar svg {
-  width: 17px;
-  margin-top: 3px;
-} */
