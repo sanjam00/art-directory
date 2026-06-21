@@ -71,6 +71,10 @@ yarn build
 - **API endpoints**: See src/settings.js — the app uses `settings.met.baseurl` and `settings.aic.baseurl` for API requests
 - **Placeholder image:** : See src/settings.js - `settings.placeholder_img` for the default artwork image
 
+See API documentation for more information:
+- **MET API**: https://metmuseum.github.io/
+- **AIC API**: https://api.artic.edu/docs/#introduction
+
 ---
 
 ## Project Structure
